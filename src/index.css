@@ -1,8 +1,10 @@
 body {
+  background-image: url("./images/people-working-feedback.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Rampart One", cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +12,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.menu {
+  width: 200px;
+  height: 50px;
+  background-color: blue;
+}
+ul {
+  list-style: none;
 }
