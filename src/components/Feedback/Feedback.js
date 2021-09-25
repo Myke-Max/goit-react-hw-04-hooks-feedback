@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import FeedbackMarkup from "../feedbackMarkup";
 import StatisticsMarkup from "../statisticMarkup";
 import Notification from "../notification";
-import PropTypes from "prop-types";
 
 export default function Feedback() {
   const [badFeedback, setBadFeedback] = useState(0);

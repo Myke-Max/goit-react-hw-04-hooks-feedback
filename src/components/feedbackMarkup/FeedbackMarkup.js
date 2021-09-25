@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./feedbackMarkup.module.css";
+import PropTypes from "prop-types";
 
 const feedbackMarkup = ({ options, leaveFeedback }) => {
   return (
@@ -22,4 +23,8 @@ const feedbackMarkup = ({ options, leaveFeedback }) => {
   );
 };
 
+feedbackMarkup.prototype = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  leaveFeedback: PropTypes.func.isRequired,
+};
 export default feedbackMarkup;
