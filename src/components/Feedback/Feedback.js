@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FeedbackMarkup from "../feedbackMarkup";
 import StatisticsMarkup from "../statisticMarkup";
 import Notification from "../notification";
@@ -6,30 +6,29 @@ import PropTypes from "prop-types";
 
 export default function Feedback() {
   const [badFeedback, setBadFeedback] = useState(0);
-  const [neutralFeedback, setNeutralFeedback] = useState(0);
+  const [neutralFeedback, serNeutralFeedback] = useState(0);
   const [goodFeedback, setGoodFeedback] = useState(0);
 
-  // const OnLeaveFeedback = (value) => {
-  //   useState((prevState) => ({
-  //     [value]: prevState[value] + 1,
-  //   }));
-  // };
-
-  const handleCounterBadFeedback = () => {
-    setBadFeedback((state) => state + 1);
+  const onLeaveFeedback = (name) => {
+    switch (name) {
+      case (name = "bad"):
+        setBadFeedback((state) => state + 1);
+        break;
+      case (name = "good"):
+        setGoodFeedback((state) => state + 1);
+        break;
+      case (name = "neutral"):
+        serNeutralFeedback((state) => state + 1);
+        break;
+      default:
+        throw new Error();
+    }
   };
-  const handleCounterNeutralFeedback = () => {
-    setNeutralFeedback((state) => state + 1);
-  };
-  const handleCounterGoodFeedback = () => {
-    setGoodFeedback((state) => state + 1);
-  };
-
-  const CountTotalFeedback = () => {
+  const countTotalFeedback = () => {
     return goodFeedback + neutralFeedback + badFeedback;
   };
 
-  const CountPositiveFeedbackPercentage = () => {
+  const countPositiveFeedbackPercentage = () => {
     return (goodFeedback / (goodFeedback + badFeedback)) * 100;
   };
 
@@ -37,19 +36,16 @@ export default function Feedback() {
     <div className="App">
       <section className="App-section">
         <FeedbackMarkup
-          onBadFeedback={handleCounterBadFeedback}
-          onNeutralFeedback={handleCounterNeutralFeedback}
-          OnGoodFeedback={handleCounterGoodFeedback}
-          // options={["bad", "neutral", "good"]}
-          // leaveFeedback={OnLeaveFeedback}
+          options={["bad", "neutral", "good"]}
+          leaveFeedback={onLeaveFeedback}
         />
-        {CountTotalFeedback() > 0 ? (
+        {countTotalFeedback() > 0 ? (
           <StatisticsMarkup
             positiveFeedbackValue={goodFeedback}
             neutralFeedbackValue={neutralFeedback}
             badFeedbackValue={badFeedback}
-            totalFeedback={CountTotalFeedback()}
-            positiveFeedbackPercentage={CountPositiveFeedbackPercentage().toFixed(
+            totalFeedback={countTotalFeedback()}
+            positiveFeedbackPercentage={countPositiveFeedbackPercentage().toFixed(
               2
             )}
           />
@@ -60,12 +56,6 @@ export default function Feedback() {
     </div>
   );
 }
-
-Feedback.propTypes = {
-  goodFeedback: PropTypes.number.isRequired,
-  neutralFeedback: PropTypes.number.isRequired,
-  badFeedback: PropTypes.number.isRequired,
-};
 
 // class Feedback extends Component {
 //   static defaultProps = {
